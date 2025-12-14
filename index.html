@@ -90,21 +90,49 @@
         </div>
       </section>
 
+      <section class="section" id="visually-prompted-tasks">
+        <div class="container">
+          <h2 class="h2">What are visually prompted tasks?</h2>
+          <div class="grid2">
+            <div>
+              <p class="muted" style="margin-bottom: 1rem; font-size: 16px;">
+                Despite rapid progress in vision-language models (VLMs), their visual perception capabilities remain underexplored. <strong>Visual prompting</strong> has emerged as a targeted paradigm: by marking regions in an image with visual markers (such as circles, boxes, or dots) and posing spatial or perceptual questions, these tasks assess low-level visual understanding that humans solve effortlessly—problems we can answer "in a blink." This stands in contrast to the knowledge-centric reasoning required by benchmarks such as MME or MMMU.
+              </p>
+              <p class="muted" style="font-size: 16px;">
+                However, we find that model performance on these visually prompted evaluations is surprisingly sensitive to seemingly minor design choices in the benchmark itself. Variations in the size, style, or layout of visual markers can substantially affect accuracy and even reorder model rankings—revealing an inherent fragility in current evaluation practices.
+              </p>
+            </div>
+            <div>
+              <figure class="mediaCard">
+                <img 
+                  src="assets/figures/vpt_tasks_examples.png" 
+                  alt="Examples of visually prompted tasks"
+                  style="width: 100%; display: block; background: #fff;"
+                />
+                <figcaption class="caption">
+                  <strong>Figure 2.</strong> Examples of visually prompted tasks including relative depth estimation and semantic correspondence.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="results">
         <div class="container">
           <h2 class="h2">Key findings</h2>
           <div class="cards">
             <article class="card">
+              <h3 class="h3">Data size matters</h3>
+              <p class="muted">
+                Placeholder summary: small sample sizes can lead to unstable rankings and misleading conclusions about model performance.
+              </p>
+            </article>
+            <article class="card">
               <h3 class="h3">Marker style matters</h3>
               <p class="muted">
                 Placeholder summary: changes in marker size/shape/color/label placement can cause large
                 accuracy swings on the same examples.
-              </p>
-            </article>
-            <article class="card">
-              <h3 class="h3">Leaderboards reorder</h3>
-              <p class="muted">
-                Placeholder summary: small “non-semantic” design choices can flip ranks among nearby models.
               </p>
             </article>
             <article class="card">
@@ -397,7 +425,7 @@
             </div>
 
             <p class="muted lbCaption">
-              <strong>Figure (HTML remake)</strong>: Performance comparison — optimizing for InternVL3-8B's ranking on
+              <strong>Figure</strong>: Performance comparison — optimizing for InternVL3-8B's ranking on
               BLINK relative depth by changing the visual marker.
             </p>
           </div>
