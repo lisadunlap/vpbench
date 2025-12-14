@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- =========
+      Edit these fields to customize your paper site.
+      ========= -->
+    <title>Visually Prompted Benchmarks Are Surprisingly Fragile</title>
+    <meta
+      name="description"
+      content="Project page for “Visually Prompted Benchmarks Are Surprisingly Fragile” (CVPR 2026 submission)."
+    />
+
+    <!-- Open Graph (nice previews when sharing) -->
+    <meta property="og:title" content="Visually Prompted Benchmarks Are Surprisingly Fragile" />
+    <meta
+      property="og:description"
+      content="Project page with abstract, figures, and citation."
+    />
+    <!-- TODO: replace with a real preview image (1200x630 recommended) -->
+    <meta property="og:image" content="assets/figures/og-placeholder.png" />
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/favicon/icon.png" />
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="header" id="top">
+      <nav class="nav">
+        <a class="nav__brand" href="#top" aria-label="Home">
+          <span class="nav__mark" aria-hidden="true"></span>
+          <span class="nav__brandText">VPT · Blink</span>
+        </a>
+        <div class="nav__links" aria-label="Primary">
+          <a href="#abstract">Abstract</a>
+          <a href="#results">Results</a>
+          <a href="#figures">Figures</a>
+          <a href="#vpbench">VPBench</a>
+          <a href="#citation">Cite</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <p class="hero__kicker">CVPR 2026 · Paper Website</p>
+        <h1 class="hero__title">Visually Prompted Benchmarks Are Surprisingly Fragile</h1>
+
+        <!-- Authors: replace placeholders -->
+        <p class="hero__authors">
+          <span class="author">Author One</span><span class="sep">·</span>
+          <span class="author">Author Two</span><span class="sep">·</span>
+          <span class="author">Author Three</span>
+        </p>
+        <p class="hero__affils">Affiliation One <span class="sep">·</span> Affiliation Two</p>
+
+        <p class="hero__tagline">
+          Small, seemingly irrelevant details in visual prompting (marker style, sampling, compression)
+          can shift accuracy and reorder VLM leaderboards.
+        </p>
+
+        <div class="ctaRow">
+          <!-- Replace # with real links when ready -->
+          <a class="btn btn--primary" href="#" aria-disabled="true">Paper (PDF)</a>
+          <a class="btn btn--ghost" href="#" aria-disabled="true">arXiv</a>
+          <a class="btn btn--ghost" href="#" aria-disabled="true">Code</a>
+          <a class="btn btn--ghost" href="#" aria-disabled="true">Data</a>
+        </div>
+
+        <div class="metaRow">
+          <div class="pill"><span class="pill__dot" aria-hidden="true"></span> Visual prompting robustness</div>
+          <div class="pill"><span class="pill__dot" aria-hidden="true"></span> Leaderboard stability</div>
+          <div class="pill"><span class="pill__dot" aria-hidden="true"></span> VPBench (16 marker variants)</div>
+        </div>
+      </section>
+    </header>
+
+    <main id="main" class="main">
+      <section class="section teaser" aria-label="Teaser">
+        <div class="container">
+          <figure class="mediaCard">
+            <img 
+              src="assets/figures/vpb_main.png" 
+              alt="Visually Prompted Tasks are Fragile: small design changes can shift leaderboards"
+              class="video"
+              style="width: 100%; display: block; background: #fff;"
+            />
+            <figcaption class="caption">
+              <strong>Figure 1.</strong> Small, seemingly irrelevant changes in visual prompting dramatically alter VLM predictions. Left: Qwen2.5-VL accuracy under different visual marker variants. Right: such variations can reorder entire leaderboards, with model rankings shifting even when nothing about the underlying task changes.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="abstract">
+        <div class="container">
+          <h2 class="h2">Abstract</h2>
+          <p class="abstract">
+            A key challenge in evaluating VLMs is testing models' ability to analyze visual content independently from their textual priors. Recent benchmarks probe visual perception through visual prompting, where questions about visual content are paired with coordinates to which the question refers, with the coordinates explicitly marked in the image itself. While these benchmarks are an important part of VLM evaluation, we find that existing models are surprisingly fragile to seemingly irrelevant details of visual prompting: simply changing a visual marker from red to blue can completely change rankings among models on a leaderboard. By evaluating nine modern open- and closed-source VLMs on two visually prompted tasks, we demonstrate how details in benchmark setup, including visual marker design and dataset size, have a significant influence on model performance and leaderboard rankings. These effects can even be exploited to lift weaker models above stronger ones; for instance, slightly increasing the size of the visual marker results in InternVL3-8B ranking alongside or better than much larger models like Gemini 2.5 Pro. Furthermore, we find that even ostensibly irrelevant modeling and inference decisions like JPEG compression can change the model lineup while similar interventions to non-visually prompted tasks have little effect on the results. To address this instability, we curate existing datasets to create VPBench, a larger visually prompted benchmark with 16 visual marker variants. We open-source this benchmark as well as our analysis tools to further facilitate robust evaluation of VLMs.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="results">
+        <div class="container">
+          <h2 class="h2">Key findings</h2>
+          <div class="cards">
+            <article class="card">
+              <h3 class="h3">Marker style matters</h3>
+              <p class="muted">
+                Placeholder summary: changes in marker size/shape/color/label placement can cause large
+                accuracy swings on the same examples.
+              </p>
+            </article>
+            <article class="card">
+              <h3 class="h3">Leaderboards reorder</h3>
+              <p class="muted">
+                Placeholder summary: small “non-semantic” design choices can flip ranks among nearby models.
+              </p>
+            </article>
+            <article class="card">
+              <h3 class="h3">Implementation subtleties</h3>
+              <p class="muted">
+                Placeholder summary: JPEG compression / inference-time details can significantly change outcomes.
+              </p>
+            </article>
+          </div>
+
+          <!-- Optional: embed an interactive Plotly chart later -->
+          <div class="callout">
+            <div class="callout__title">Optional: interactive plots</div>
+            <p class="callout__body muted">
+              If you want, we can later add Plotly charts here (e.g., rank-change bars across marker styles).
+              GitHub Pages supports this with a single JS include.
+            </p>
+          </div>
+
+          <!-- Interactive marker comparison -->
+          <div class="interactiveSection" aria-label="Interactive marker comparison">
+            <div class="interactiveHeader">
+              <h3 class="h3">Interactive marker comparison</h3>
+              <p class="muted">
+                Select a dataset and marker variant to see how accuracy and rankings change compared to the default.
+              </p>
+            </div>
+
+            <div class="datasetSelector" style="margin-bottom: 1rem;">
+              <label for="datasetSelect" style="font-weight: 600; margin-right: 0.5rem;">Dataset:</label>
+              <select id="datasetSelect" class="datasetSelect" style="padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 0.375rem; font-size: 0.9rem;">
+                <option value="DA2k" selected>DA2k</option>
+                <option value="SPair">SPair</option>
+              </select>
+            </div>
+
+            <div class="markerSelector">
+              <button class="markerBtn markerBtn--active" data-marker="color_blue">Color: Blue</button>
+              <button class="markerBtn" data-marker="marker_square">Marker Type: Square</button>
+              <button class="markerBtn" data-marker="radius_3">Radius: 3</button>
+              <button class="markerBtn" data-marker="text_offset_below">Text Offset: Below</button>
+              <button class="markerBtn" data-marker="font_scale_0.2">Font Scale: 0.2</button>
+            </div>
+
+            <div class="interactiveGrid">
+              <div class="chartPanel">
+                <div id="accuracyChart" class="plotlyChart"></div>
+              </div>
+              <div class="leaderboardPanel">
+                <table class="interactiveLb" id="interactiveLbTable">
+                  <thead>
+                    <tr>
+                      <th>Model</th>
+                      <th class="lbCell--center">Rank</th>
+                      <th class="lbCell--center">Δ Rank</th>
+                      <th class="lbCell--right">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody id="interactiveLbBody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <p class="muted lbCaption">
+              <strong>Figure 6 (interactive)</strong>: Accuracy and ranking changes across marker variants.
+              Select a dataset and marker above to compare with the default evaluation.
+            </p>
+          </div>
+
+          <div class="lbSection" aria-label="Gaming benchmarks by changing markers">
+            <div class="lbSection__header">
+              <h3 class="h2 lbSection__title">Gaming benchmarks by changing markers</h3>
+              <p class="muted lbSection__subtitle">
+                Same task, different marker formatting. Small visual changes can reorder the leaderboard.
+              </p>
+            </div>
+
+            <div class="lbGrid" role="region" aria-label="Leaderboards under marker variants">
+              <section class="lbCard" aria-label="Default leaderboard">
+                <div class="lbHead">
+                  <div class="lbTitle">Default</div>
+                  <div class="lbSub">Standard Evaluation</div>
+                </div>
+                <table class="lbTable">
+                  <colgroup>
+                    <col class="lbColModel" />
+                    <col class="lbColRank" />
+                    <col class="lbColScore" />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">Model</th>
+                      <th scope="col" class="lbCell--center">Rank</th>
+                      <th scope="col" class="lbCell--right">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Llama 4 Scout</td>
+                      <td class="lbCell--center"><span class="lbRank">#1</span></td>
+                      <td class="lbCell--right"><span class="lbScore">89.41%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemini 2.5 Flash</td>
+                      <td class="lbCell--center"><span class="lbRank">#2</span></td>
+                      <td class="lbCell--right"><span class="lbScore">77.65%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemini 2.5 Pro</td>
+                      <td class="lbCell--center"><span class="lbRank">#2</span></td>
+                      <td class="lbCell--right"><span class="lbScore">77.65%</span></td>
+                    </tr>
+                    <tr class="lbRow lbRow--highlight">
+                      <td>InternVL3-<wbr />8B</td>
+                      <td class="lbCell--center"><span class="lbRank">#4</span></td>
+                      <td class="lbCell--right"><span class="lbScore">76.47%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen3-VL-8B</td>
+                      <td class="lbCell--center"><span class="lbRank">#4</span></td>
+                      <td class="lbCell--right"><span class="lbScore">76.47%</span></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4.1</td>
+                      <td class="lbCell--center"><span class="lbRank">#6</span></td>
+                      <td class="lbCell--right"><span class="lbScore">75.29%</span></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4o</td>
+                      <td class="lbCell--center"><span class="lbRank">#7</span></td>
+                      <td class="lbCell--right"><span class="lbScore">71.76%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen2.5-VL-7B</td>
+                      <td class="lbCell--center"><span class="lbRank">#8</span></td>
+                      <td class="lbCell--right"><span class="lbScore">70.59%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemma 3-4B</td>
+                      <td class="lbCell--center"><span class="lbRank">#9</span></td>
+                      <td class="lbCell--right"><span class="lbScore">52.94%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section class="lbCard" aria-label="Deflate InternVL3-8B leaderboard">
+                <div class="lbHead">
+                  <div class="lbTitle">Deflate InternVL3-8B</div>
+                  <div class="lbSub">Marker Type Square</div>
+                </div>
+                <table class="lbTable">
+                  <colgroup>
+                    <col class="lbColModel" />
+                    <col class="lbColRank" />
+                    <col class="lbColScore" />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">Model</th>
+                      <th scope="col" class="lbCell--center">Rank</th>
+                      <th scope="col" class="lbCell--right">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Llama 4 Scout</td>
+                      <td class="lbCell--center"><span class="lbRank">#1</span></td>
+                      <td class="lbCell--right"><span class="lbScore">90.59%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemini 2.5 Pro</td>
+                      <td class="lbCell--center"><span class="lbRank">#2</span></td>
+                      <td class="lbCell--right"><span class="lbScore">84.71%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen3-VL-8B</td>
+                      <td class="lbCell--center"><span class="lbRank">#3</span></td>
+                      <td class="lbCell--right"><span class="lbScore">77.65%</span></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4.1</td>
+                      <td class="lbCell--center"><span class="lbRank">#3</span></td>
+                      <td class="lbCell--right"><span class="lbScore">77.65%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemini 2.5 Flash</td>
+                      <td class="lbCell--center"><span class="lbRank">#5</span></td>
+                      <td class="lbCell--right"><span class="lbScore">76.47%</span></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4o</td>
+                      <td class="lbCell--center"><span class="lbRank">#6</span></td>
+                      <td class="lbCell--right"><span class="lbScore">75.29%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen2.5-VL-7B</td>
+                      <td class="lbCell--center"><span class="lbRank">#7</span></td>
+                      <td class="lbCell--right"><span class="lbScore">67.06%</span></td>
+                    </tr>
+                    <tr class="lbRow lbRow--highlight">
+                      <td>InternVL3-<wbr />8B</td>
+                      <td class="lbCell--center"><span class="lbRank">#8</span></td>
+                      <td class="lbCell--right"><span class="lbScore">63.53%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemma 3-4B</td>
+                      <td class="lbCell--center"><span class="lbRank">#9</span></td>
+                      <td class="lbCell--right"><span class="lbScore">55.29%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section class="lbCard" aria-label="Inflate InternVL3-8B leaderboard">
+                <div class="lbHead">
+                  <div class="lbTitle">Inflate InternVL3-8B</div>
+                  <div class="lbSub">Font Scale 1.0</div>
+                </div>
+                <table class="lbTable">
+                  <colgroup>
+                    <col class="lbColModel" />
+                    <col class="lbColRank" />
+                    <col class="lbColScore" />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">Model</th>
+                      <th scope="col" class="lbCell--center">Rank</th>
+                      <th scope="col" class="lbCell--right">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Llama 4 Scout</td>
+                      <td class="lbCell--center"><span class="lbRank">#1</span></td>
+                      <td class="lbCell--right"><span class="lbScore">85.88%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemini 2.5 Flash</td>
+                      <td class="lbCell--center"><span class="lbRank">#2</span></td>
+                      <td class="lbCell--right"><span class="lbScore">81.18%</span></td>
+                    </tr>
+                    <tr class="lbRow lbRow--highlight">
+                      <td>InternVL3-<wbr />8B</td>
+                      <td class="lbCell--center"><span class="lbRank">#3</span></td>
+                      <td class="lbCell--right"><span class="lbScore">77.65%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen3-VL-8B</td>
+                      <td class="lbCell--center"><span class="lbRank">#3</span></td>
+                      <td class="lbCell--right"><span class="lbScore">77.65%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemini 2.5 Pro</td>
+                      <td class="lbCell--center"><span class="lbRank">#5</span></td>
+                      <td class="lbCell--right"><span class="lbScore">76.47%</span></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4o</td>
+                      <td class="lbCell--center"><span class="lbRank">#6</span></td>
+                      <td class="lbCell--right"><span class="lbScore">72.94%</span></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4.1</td>
+                      <td class="lbCell--center"><span class="lbRank">#7</span></td>
+                      <td class="lbCell--right"><span class="lbScore">71.76%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen2.5-VL-7B</td>
+                      <td class="lbCell--center"><span class="lbRank">#8</span></td>
+                      <td class="lbCell--right"><span class="lbScore">70.59%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Gemma 3-4B</td>
+                      <td class="lbCell--center"><span class="lbRank">#9</span></td>
+                      <td class="lbCell--right"><span class="lbScore">49.41%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+
+            <p class="muted lbCaption">
+              <strong>Figure (HTML remake)</strong>: Performance comparison — optimizing for InternVL3-8B's ranking on
+              BLINK relative depth by changing the visual marker.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="figures">
+        <div class="container">
+          <div class="sectionHeader">
+            <h2 class="h2">Figures &amp; animations</h2>
+            <p class="muted">Drop files into <code>assets/figures/</code> or <code>assets/animations/</code>.</p>
+          </div>
+
+          <div class="gallery">
+            <figure class="galleryItem">
+              <div class="thumb" role="img" aria-label="Figure placeholder: marker variants"></div>
+              <figcaption class="caption">
+                <strong>Marker variants (placeholder)</strong><br />
+                Grid of your 16 marker styles (size/shape/color/label layout).
+              </figcaption>
+            </figure>
+            <figure class="galleryItem">
+              <div class="thumb" role="img" aria-label="Figure placeholder: rank changes"></div>
+              <figcaption class="caption">
+                <strong>Rank changes (placeholder)</strong><br />
+                A plot showing how ranks fluctuate across marker styles.
+              </figcaption>
+            </figure>
+            <figure class="galleryItem">
+              <div class="thumb" role="img" aria-label="Figure placeholder: robustness to compression"></div>
+              <figcaption class="caption">
+                <strong>Compression sensitivity (placeholder)</strong><br />
+                A plot showing how JPEG quality changes accuracy/rankings.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="vpbench">
+        <div class="container">
+          <h2 class="h2">VPBench</h2>
+          <p class="muted">
+            Placeholder section for your benchmark release: dataset description, scale, tasks, and how to use it.
+          </p>
+
+          <div class="grid2">
+            <div class="card card--soft">
+              <h3 class="h3">What’s included</h3>
+              <ul class="bullets">
+                <li><strong>Datasets</strong>: BLINK, DA2k, SPair (curated/expanded)</li>
+                <li><strong>Marker variants</strong>: 16 styles</li>
+                <li><strong>Tools</strong>: analysis + reference inference (placeholder)</li>
+              </ul>
+            </div>
+            <div class="card card--soft">
+              <h3 class="h3">How to cite / access</h3>
+              <p class="muted">
+                Add links to the data repository and a short “getting started” snippet.
+              </p>
+              <a class="btn btn--primary" href="#" aria-disabled="true">Download VPBench (placeholder)</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="citation">
+        <div class="container">
+          <h2 class="h2">Citation</h2>
+
+          <div class="citeGrid">
+            <div class="citeBox">
+              <div class="citeBox__label">Suggested citation</div>
+              <p class="citeText">
+                Author One, Author Two, &amp; Author Three. (2026). <em>Visually Prompted Benchmarks Are Surprisingly
+                Fragile</em>. CVPR (submission).
+              </p>
+              <p class="muted small">
+                Replace authors/venue once you de-anonymize (or keep placeholders if preferred).
+              </p>
+            </div>
+
+            <div class="bibBox">
+              <div class="bibBox__header">
+                <div class="bibBox__label">BibTeX</div>
+                <button class="btn btn--small" type="button" data-copy-target="#bibtex">
+                  Copy
+                </button>
+              </div>
+              <pre class="bibtex" id="bibtex"><code>@inproceedings{vptblink2026fragile,
+  title     = {Visually Prompted Benchmarks Are Surprisingly Fragile},
+  author    = {Author One and Author Two and Author Three},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026},
+  note      = {Submission},
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section footer">
+        <div class="container footer__inner">
+          <div class="footer__left">
+            <div class="footer__brand">VPT · Blink</div>
+            <p class="muted small">
+              Built as a static site for GitHub Pages. Replace placeholders with real links, figures, and authors.
+            </p>
+          </div>
+          <div class="footer__right">
+            <a href="#top">Back to top</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
