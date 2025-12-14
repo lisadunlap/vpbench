@@ -137,10 +137,13 @@ function updateVisualization(markerKey) {
     marker: { color: "rgba(20, 184, 166, 0.7)" }
   };
 
+  // Set y-axis range based on dataset
+  const yRange = currentDataset === 'DA2k' ? [45, 100] : [20, 100];
+  
   const layout = {
     title: { text: `Accuracy Comparison (${currentDataset})`, font: { size: 14, family: "Avenir Next, Avenir, sans-serif" } },
     xaxis: { title: "", tickangle: -45, tickfont: { size: 11 } },
-    yaxis: { title: "Accuracy (%)", range: [20, 100] },
+    yaxis: { title: "Accuracy (%)", range: yRange },
     barmode: "group",
     margin: { l: 50, r: 20, t: 70, b: 100 },
     font: { family: "Avenir Next, Avenir, sans-serif" },
