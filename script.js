@@ -61,7 +61,7 @@ let currentDataset = 'DA2k';
 
 async function loadMarkerData() {
   try {
-    const response = await fetch('marker_acc.csv');
+    const response = await fetch('assets/data/marker_acc.csv');
     const csvText = await response.text();
     
     const lines = csvText.trim().split('\n');

@@ -32,31 +32,22 @@
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="header" id="top">
-      <nav class="nav">
-        <a class="nav__brand" href="#top" aria-label="Home">
-          <span class="nav__mark" aria-hidden="true"></span>
-          <span class="nav__brandText">VPT · Blink</span>
-        </a>
-        <div class="nav__links" aria-label="Primary">
-          <a href="#abstract">Abstract</a>
-          <a href="#results">Results</a>
-          <a href="#figures">Figures</a>
-          <a href="#vpbench">VPBench</a>
-          <a href="#citation">Cite</a>
-        </div>
-      </nav>
-
       <section class="hero">
-        <p class="hero__kicker">CVPR 2026 · Paper Website</p>
         <h1 class="hero__title">Visually Prompted Benchmarks Are Surprisingly Fragile</h1>
 
-        <!-- Authors: replace placeholders -->
+        <!-- Authors -->
         <p class="hero__authors">
-          <span class="author">Author One</span><span class="sep">·</span>
-          <span class="author">Author Two</span><span class="sep">·</span>
-          <span class="author">Author Three</span>
+          <span class="author">Haiwen Feng</span><span class="sep">·</span>
+          <span class="author">Long Lian</span><span class="sep">·</span>
+          <span class="author">Lisa Dunlap</span><span class="sep">·</span>
+          <span class="author">Jiahao Shu</span><span class="sep">·</span>
+          <span class="author">XuDong Wang</span><span class="sep">·</span>
+          <span class="author">Renhao Wang</span><span class="sep">·</span>
+          <span class="author">Trevor Darrell</span><span class="sep">·</span>
+          <span class="author">Alane Suhr</span><span class="sep">·</span>
+          <span class="author">Angjoo Kanazawa</span>
         </p>
-        <p class="hero__affils">Affiliation One <span class="sep">·</span> Affiliation Two</p>
+        <p class="hero__affils">UC Berkeley</p>
 
         <p class="hero__tagline">
           Small, seemingly irrelevant details in visual prompting (marker style, sampling, compression)
@@ -69,12 +60,6 @@
           <a class="btn btn--ghost" href="#" aria-disabled="true">arXiv</a>
           <a class="btn btn--ghost" href="#" aria-disabled="true">Code</a>
           <a class="btn btn--ghost" href="#" aria-disabled="true">Data</a>
-        </div>
-
-        <div class="metaRow">
-          <div class="pill"><span class="pill__dot" aria-hidden="true"></span> Visual prompting robustness</div>
-          <div class="pill"><span class="pill__dot" aria-hidden="true"></span> Leaderboard stability</div>
-          <div class="pill"><span class="pill__dot" aria-hidden="true"></span> VPBench (16 marker variants)</div>
         </div>
       </section>
     </header>
@@ -130,14 +115,10 @@
             </article>
           </div>
 
-          <!-- Optional: embed an interactive Plotly chart later -->
-          <div class="callout">
-            <div class="callout__title">Optional: interactive plots</div>
-            <p class="callout__body muted">
-              If you want, we can later add Plotly charts here (e.g., rank-change bars across marker styles).
-              GitHub Pages supports this with a single JS include.
-            </p>
-          </div>
+          <h3 class="h2" style="margin-top: 2rem; margin-bottom: 1rem;">Marker Style Matters</h3>
+          <p class="muted" style="margin-bottom: 2rem; line-height: 1.6;">
+            We evaluated models across 16 distinct visual marker styles, systematically varying attributes like color, shape, size, and label placement to test robustness. We found that seemingly irrelevant design choices—such as switching a red circle to a blue square—can cause accuracy swings of up to 21% on the exact same image-question pairs. These fluctuations are severe enough to completely reshuffle leaderboards, effectively allowing weaker models to rank above stronger ones based solely on the style of the visual prompt.
+          </p>
 
           <!-- Interactive marker comparison -->
           <div class="interactiveSection" aria-label="Interactive marker comparison">
@@ -195,7 +176,8 @@
             <div class="lbSection__header">
               <h3 class="h2 lbSection__title">Gaming benchmarks by changing markers</h3>
               <p class="muted lbSection__subtitle">
-                Same task, different marker formatting. Small visual changes can reorder the leaderboard.
+                We demonstrate that visually prompted leaderboards can be effectively "gamed" by cherry-picking marker styles that favor specific models. For example, simply increasing the font size of a visual marker allowed us to artificially lift a weaker model, InternVL3-8B, to rank higher than the much larger Gemini 2.5 Pro.
+              </p>
               </p>
             </div>
 
@@ -477,47 +459,20 @@
         <div class="container">
           <h2 class="h2">Citation</h2>
 
-          <div class="citeGrid">
-            <div class="citeBox">
-              <div class="citeBox__label">Suggested citation</div>
-              <p class="citeText">
-                Author One, Author Two, &amp; Author Three. (2026). <em>Visually Prompted Benchmarks Are Surprisingly
-                Fragile</em>. CVPR (submission).
-              </p>
-              <p class="muted small">
-                Replace authors/venue once you de-anonymize (or keep placeholders if preferred).
-              </p>
+          <div class="bibBox">
+            <div class="bibBox__header">
+              <div class="bibBox__label">BibTeX</div>
+              <button class="btn btn--small" type="button" data-copy-target="#bibtex">
+                Copy
+              </button>
             </div>
-
-            <div class="bibBox">
-              <div class="bibBox__header">
-                <div class="bibBox__label">BibTeX</div>
-                <button class="btn btn--small" type="button" data-copy-target="#bibtex">
-                  Copy
-                </button>
-              </div>
-              <pre class="bibtex" id="bibtex"><code>@inproceedings{vptblink2026fragile,
+            <pre class="bibtex" id="bibtex" style="white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;"><code>@inproceedings{vptblink2026fragile,
   title     = {Visually Prompted Benchmarks Are Surprisingly Fragile},
-  author    = {Author One and Author Two and Author Three},
+  author    = {Haiwen Feng and Long Lian and Lisa Dunlap and Jiahao Shu and XuDong Wang and Renhao Wang and Trevor Darrell and Alane Suhr and Angjoo Kanazawa},
   booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year      = {2026},
   note      = {Submission},
 }</code></pre>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section footer">
-        <div class="container footer__inner">
-          <div class="footer__left">
-            <div class="footer__brand">VPT · Blink</div>
-            <p class="muted small">
-              Built as a static site for GitHub Pages. Replace placeholders with real links, figures, and authors.
-            </p>
-          </div>
-          <div class="footer__right">
-            <a href="#top">Back to top</a>
           </div>
         </div>
       </section>
