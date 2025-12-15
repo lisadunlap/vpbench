@@ -206,9 +206,17 @@
           </div>
 
           <h3 class="h2" style="margin-top: 3rem; margin-bottom: 1rem;">Low level implementation details matter</h3>
-          <p class="muted" style="margin-bottom: 2rem; line-height: 1.6;">
-            Placeholder content about low level implementation details.
+          <p class="muted" style="line-height: 1.6; font-size: 16px; max-width: 82ch; margin-bottom: 1.5rem;">
+            Even ostensibly irrelevant implementation details can significantly impact model performance on visually prompted tasks. We find that JPEG compression quality—a factor imperceptible to human evaluators—produces statistically significant changes in accuracy and rankings. Importantly, these compression effects are specific to visually prompted benchmarks; applying the same intervention to traditional VLM benchmarks like MMBench shows negligible impact, highlighting the unique fragility of visual prompting evaluations.
           </p>
+
+          <div class="chartPanel" style="width: 80%; margin-left: auto; margin-right: auto; margin-bottom: 2rem;">
+            <div id="jpegRankChart" class="plotlyChart" style="min-height: 420px;"></div>
+            <p class="muted lbCaption" style="margin-top: 10px;">
+              <strong>Figure 3.</strong> JPEG compression quality can reorder rankings on visually prompted tasks (BLINK RD),
+              while rankings on traditional benchmarks (MME) remain comparatively stable.
+            </p>
+          </div>
 
           <div class="lbSection" aria-label="Gaming benchmarks by changing markers">
             <div class="interactiveHeader">

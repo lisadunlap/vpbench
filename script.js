@@ -52,6 +52,22 @@ document.addEventListener("click", (e) => {
   });
 });
 
+/**
+ * Parse a simple CSV string into headers + rows.
+ *
+ * Notes:
+ * - Assumes there are no commas inside fields (i.e., no quoted commas).
+ *
+ * @param {string} csvText - Raw CSV content.
+ * @returns {{ headers: string[], rows: string[][] }} Parsed headers and row values.
+ */
+function parseSimpleCsv(csvText) {
+  const lines = csvText.trim().split("\n").filter(Boolean);
+  const headers = (lines[0] || "").split(",").map((h) => h.trim());
+  const rows = lines.slice(1).map((line) => line.split(",").map((v) => v.trim()));
+  return { headers, rows };
+}
+
 // ===========================
 // Interactive marker comparison (DA2k data from CSV)
 // ===========================
@@ -67,11 +83,9 @@ async function loadMarkerData() {
     }
     const csvText = await response.text();
     
-    const lines = csvText.trim().split('\n');
-    const headers = lines[0].split(',');
-    
-    const rows = lines.slice(1).map(line => {
-      const values = line.split(',');
+    const { rows } = parseSimpleCsv(csvText);
+
+    const parsedRows = rows.map((values) => {
       return {
         dataset: values[0],
         marker_style: values[1],
@@ -81,23 +95,23 @@ async function loadMarkerData() {
       };
     });
     
-    const datasets = [...new Set(rows.map(row => row.dataset))];
+    const datasets = [...new Set(parsedRows.map((row) => row.dataset))];
     const data = {};
     
-    datasets.forEach(dataset => {
-      const datasetRows = rows.filter(row => row.dataset === dataset);
-      const models = [...new Set(datasetRows.map(row => row.model))];
-      const markerStyles = [...new Set(datasetRows.map(row => row.marker_style))];
+    datasets.forEach((dataset) => {
+      const datasetRows = parsedRows.filter((row) => row.dataset === dataset);
+      const models = [...new Set(datasetRows.map((row) => row.model))];
+      const markerStyles = [...new Set(datasetRows.map((row) => row.marker_style))];
       
       data[dataset] = { models };
       
-      markerStyles.forEach(style => {
-        const styleRows = datasetRows.filter(row => row.marker_style === style);
+      markerStyles.forEach((style) => {
+        const styleRows = datasetRows.filter((row) => row.marker_style === style);
         styleRows.sort((a, b) => models.indexOf(a.model) - models.indexOf(b.model));
         
         data[dataset][style] = {
-          accuracies: styleRows.map(row => row.accuracy),
-          ranks: styleRows.map(row => row.rank)
+          accuracies: styleRows.map((row) => row.accuracy),
+          ranks: styleRows.map((row) => row.rank)
         };
       });
     });
@@ -184,53 +198,268 @@ function updateVisualization(markerKey) {
   });
 }
 
-// Initialize on page load
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadMarkerData();
-  
-  if (!MARKER_DATA) {
-    console.error("Failed to load marker data");
-    return;
+/**
+ * Load JPEG compression rank-variance data.
+ *
+ * Expected CSV columns:
+ * - benchmark: string (e.g., "BLINK_RD", "MME")
+ * - model: string (e.g., "Llama 4 Scout")
+ * - jpeg_quality: string (e.g., "default", "jpeg70", "jpeg80", "jpeg90")
+ * - rank: integer (1 = best)
+ *
+ * @returns {Promise<Array<{benchmark: string, model: string, jpeg_quality: string, rank: number}> | null>}
+ */
+async function loadJpegRankData() {
+  const response = await fetch("./assets/data/jpeg_rank.csv");
+  if (!response.ok) {
+    console.error(`Failed to load JPEG rank data: HTTP ${response.status}`);
+    return null;
   }
-  
-  const buttons = document.querySelectorAll(".markerBtn");
-  const datasetSelect = document.getElementById("datasetSelect");
-  if (!buttons.length) return;
 
-  // Initialize with the first button's marker (color_blue)
-  const firstBtn = buttons[0];
-  const initialMarker = firstBtn.getAttribute("data-marker");
-  updateVisualization(initialMarker || "color_blue");
+  const csvText = await response.text();
+  const { rows } = parseSimpleCsv(csvText);
 
-  // Add click event listeners to marker buttons
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      // Remove active class from all buttons
-      buttons.forEach((b) => b.classList.remove("markerBtn--active"));
-      
-      // Add active class to clicked button
-      btn.classList.add("markerBtn--active");
-      
-      // Update visualization
-      const marker = btn.getAttribute("data-marker");
-      if (marker) {
-        updateVisualization(marker);
-      }
-    });
+  return rows
+    .filter((values) => values.length >= 4)
+    .map((values) => ({
+      benchmark: values[0],
+      model: values[1],
+      jpeg_quality: values[2],
+      rank: parseInt(values[3], 10),
+    }));
+}
+
+/**
+ * Render a two-panel Plotly chart showing rank variance across JPEG compression settings.
+ *
+ * Visualization:
+ * - y-axis: models (ordered by default rank)
+ * - x-axis: rank (lower is better)
+ * - for each model: a horizontal segment from min(rank) to max(rank) across JPEG qualities,
+ *   plus a dot at the "default" rank.
+ *
+ * @param {Array<{benchmark: string, model: string, jpeg_quality: string, rank: number}>} rows
+ * @returns {void}
+ */
+function renderJpegRankChart(rows) {
+  const container = document.getElementById("jpegRankChart");
+  if (!container) return;
+
+  const BENCHMARKS = [
+    { key: "BLINK_RD", title: "BLINK Relative Depth" },
+    { key: "MME", title: "MME (semantic)" },
+  ];
+
+  const byBenchmark = new Map();
+  rows.forEach((r) => {
+    if (!byBenchmark.has(r.benchmark)) byBenchmark.set(r.benchmark, []);
+    byBenchmark.get(r.benchmark).push(r);
   });
 
-  // Add change event listener to dataset select
-  if (datasetSelect) {
-    datasetSelect.addEventListener("change", (e) => {
-      currentDataset = e.target.value;
-      
-      // Get currently active marker button
-      const activeBtn = document.querySelector(".markerBtn--active");
-      const activeMarker = activeBtn ? activeBtn.getAttribute("data-marker") : "color_blue";
-      
-      // Update visualization with new dataset
-      updateVisualization(activeMarker);
-    });
+  function qualitySortKey(q) {
+    if (q === "default") return 1000;
+    const m = q.match(/\d+/);
+    return m ? parseInt(m[0], 10) : 0;
   }
+
+  const traces = [];
+  const yCategoryArrays = {};
+
+  BENCHMARKS.forEach((bench, benchIdx) => {
+    const data = byBenchmark.get(bench.key) || [];
+    if (!data.length) return;
+
+    const byModel = new Map();
+    data.forEach((r) => {
+      if (!byModel.has(r.model)) byModel.set(r.model, []);
+      byModel.get(r.model).push(r);
+    });
+
+    const modelsSorted = [...byModel.keys()].sort((a, b) => {
+      const aDefault = (byModel.get(a) || []).find((x) => x.jpeg_quality === "default")?.rank ?? 9999;
+      const bDefault = (byModel.get(b) || []).find((x) => x.jpeg_quality === "default")?.rank ?? 9999;
+      return aDefault - bDefault;
+    });
+
+    yCategoryArrays[bench.key] = [...modelsSorted].reverse();
+
+    const segmentX = [];
+    const segmentY = [];
+    const segmentHover = [];
+
+    const dotX = [];
+    const dotY = [];
+    const dotHover = [];
+
+    modelsSorted.forEach((model) => {
+      const points = (byModel.get(model) || [])
+        .slice()
+        .sort((a, b) => qualitySortKey(a.jpeg_quality) - qualitySortKey(b.jpeg_quality));
+
+      const ranks = points.map((p) => p.rank).filter((v) => Number.isFinite(v));
+      if (!ranks.length) return;
+
+      const minRank = Math.min(...ranks);
+      const maxRank = Math.max(...ranks);
+      const defaultRank = points.find((p) => p.jpeg_quality === "default")?.rank;
+
+      const details = points.map((p) => `${p.jpeg_quality}: #${p.rank}`).join("<br>");
+
+      segmentX.push(minRank, maxRank, null);
+      segmentY.push(model, model, null);
+      segmentHover.push(
+        `<b>${model}</b><br><span>range: #${minRank}–#${maxRank}</span><br>${details}`,
+        `<b>${model}</b><br><span>range: #${minRank}–#${maxRank}</span><br>${details}`,
+        null
+      );
+
+      if (Number.isFinite(defaultRank)) {
+        dotX.push(defaultRank);
+        dotY.push(model);
+        dotHover.push(`<b>${model}</b><br><span>default: #${defaultRank}</span><br>${details}`);
+      }
+    });
+
+    const axisSuffix = benchIdx === 0 ? "" : "2";
+
+    traces.push(
+      {
+        type: "scatter",
+        mode: "lines",
+        x: segmentX,
+        y: segmentY,
+        hoverinfo: "text",
+        text: segmentHover,
+        line: { color: "rgba(11, 18, 32, 0.75)", width: 2 },
+        showlegend: false,
+        xaxis: `x${axisSuffix}`,
+        yaxis: `y${axisSuffix}`,
+      },
+      {
+        type: "scatter",
+        mode: "markers",
+        x: dotX,
+        y: dotY,
+        hoverinfo: "text",
+        text: dotHover,
+        marker: { color: "rgba(11, 18, 32, 0.9)", size: 10 },
+        showlegend: false,
+        xaxis: `x${axisSuffix}`,
+        yaxis: `y${axisSuffix}`,
+      }
+    );
+  });
+
+  const layout = {
+    grid: { rows: 1, columns: 2, pattern: "independent" },
+    margin: { l: 160, r: 30, t: 60, b: 50 },
+    font: { family: "Avenir Next, Avenir, sans-serif" },
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(0,0,0,0)",
+    annotations: [
+      {
+        text: "BLINK Relative Depth",
+        x: 0.22,
+        y: 1.12,
+        xref: "paper",
+        yref: "paper",
+        showarrow: false,
+        font: { size: 20, family: "Avenir Next, Avenir, sans-serif", color: "rgba(11, 18, 32, 0.92)" },
+      },
+      {
+        text: "MME (semantic)",
+        x: 0.78,
+        y: 1.12,
+        xref: "paper",
+        yref: "paper",
+        showarrow: false,
+        font: { size: 20, family: "Avenir Next, Avenir, sans-serif", color: "rgba(11, 18, 32, 0.92)" },
+      },
+    ],
+    xaxis: {
+      title: "Rank",
+      tickmode: "linear",
+      tick0: 1,
+      dtick: 1,
+      zeroline: false,
+      gridcolor: "rgba(11, 18, 32, 0.06)",
+    },
+    xaxis2: {
+      title: "Rank",
+      tickmode: "linear",
+      tick0: 1,
+      dtick: 1,
+      zeroline: false,
+      gridcolor: "rgba(11, 18, 32, 0.06)",
+    },
+    yaxis: {
+      title: "Model",
+      type: "category",
+      categoryorder: "array",
+      categoryarray: yCategoryArrays.BLINK_RD || [],
+      automargin: true,
+      gridcolor: "rgba(11, 18, 32, 0.06)",
+    },
+    yaxis2: {
+      title: "Model",
+      type: "category",
+      categoryorder: "array",
+      categoryarray: yCategoryArrays.MME || [],
+      automargin: true,
+      gridcolor: "rgba(11, 18, 32, 0.06)",
+    },
+  };
+
+  const config = { responsive: true, displayModeBar: false };
+  Plotly.newPlot(container, traces, layout, config);
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", async () => {
+  const jpegRowsPromise = loadJpegRankData();
+  await loadMarkerData();
+
+  // Marker interaction (only if section exists)
+  const buttons = document.querySelectorAll(".markerBtn");
+  const datasetSelect = document.getElementById("datasetSelect");
+  if (MARKER_DATA && buttons.length) {
+    // Initialize with the first button's marker (color_blue)
+    const firstBtn = buttons[0];
+    const initialMarker = firstBtn.getAttribute("data-marker");
+    updateVisualization(initialMarker || "color_blue");
+
+    // Add click event listeners to marker buttons
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Remove active class from all buttons
+        buttons.forEach((b) => b.classList.remove("markerBtn--active"));
+
+        // Add active class to clicked button
+        btn.classList.add("markerBtn--active");
+
+        // Update visualization
+        const marker = btn.getAttribute("data-marker");
+        if (marker) updateVisualization(marker);
+      });
+    });
+
+    // Add change event listener to dataset select
+    if (datasetSelect) {
+      datasetSelect.addEventListener("change", (e) => {
+        currentDataset = e.target.value;
+
+        // Get currently active marker button
+        const activeBtn = document.querySelector(".markerBtn--active");
+        const activeMarker = activeBtn ? activeBtn.getAttribute("data-marker") : "color_blue";
+
+        // Update visualization with new dataset
+        updateVisualization(activeMarker);
+      });
+    }
+  }
+
+  // JPEG rank plot
+  const jpegRows = await jpegRowsPromise;
+  if (jpegRows) renderJpegRankChart(jpegRows);
 });
 
