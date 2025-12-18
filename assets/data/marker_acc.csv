@@ -1,109 +1,217 @@
-dataset,marker_style,model,accuracy,rank
-DA2k,default,Llama 4 Scout,73.7,1
-DA2k,color_blue,Llama 4 Scout,72.7,2
-DA2k,marker_square,Llama 4 Scout,72.7,1
-DA2k,radius_3,Llama 4 Scout,74.4,1
-DA2k,text_offset_below,Llama 4 Scout,70.9,1
-DA2k,font_scale_0.2,Llama 4 Scout,71.9,2
-DA2k,default,Gemini 2.5 Flash,71.4,2
-DA2k,color_blue,Gemini 2.5 Flash,73.3,1
-DA2k,marker_square,Gemini 2.5 Flash,72.1,2
-DA2k,radius_3,Gemini 2.5 Flash,71.8,3
-DA2k,text_offset_below,Gemini 2.5 Flash,70.2,2
-DA2k,font_scale_0.2,Gemini 2.5 Flash,70.9,3
-DA2k,default,Gemini 2.5 Pro,69.3,3
-DA2k,color_blue,Gemini 2.5 Pro,72.3,3
-DA2k,marker_square,Gemini 2.5 Pro,71.5,3
-DA2k,radius_3,Gemini 2.5 Pro,72.2,2
-DA2k,text_offset_below,Gemini 2.5 Pro,68.6,3
-DA2k,font_scale_0.2,Gemini 2.5 Pro,73.4,1
-DA2k,default,Qwen3-VL-8B,69.0,4
-DA2k,color_blue,Qwen3-VL-8B,69.1,4
-DA2k,marker_square,Qwen3-VL-8B,67.3,4
-DA2k,radius_3,Qwen3-VL-8B,67.3,4
-DA2k,text_offset_below,Qwen3-VL-8B,65.6,4
-DA2k,font_scale_0.2,Qwen3-VL-8B,69.1,4
-DA2k,default,GPT-4.1,64.3,5
-DA2k,color_blue,GPT-4.1,64.3,5
-DA2k,marker_square,GPT-4.1,62.6,5
-DA2k,radius_3,GPT-4.1,64.7,5
-DA2k,text_offset_below,GPT-4.1,64.5,5
-DA2k,font_scale_0.2,GPT-4.1,64.6,5
-DA2k,default,InternVL3-8B,62.8,6
-DA2k,color_blue,InternVL3-8B,62.7,6
-DA2k,marker_square,InternVL3-8B,61.4,7
-DA2k,radius_3,InternVL3-8B,63.1,7
-DA2k,text_offset_below,InternVL3-8B,61.5,6
-DA2k,font_scale_0.2,InternVL3-8B,59.9,7
-DA2k,default,Qwen2.5-VL-7B,61.3,7
-DA2k,color_blue,Qwen2.5-VL-7B,58.0,8
-DA2k,marker_square,Qwen2.5-VL-7B,62.4,6
-DA2k,radius_3,Qwen2.5-VL-7B,60.3,8
-DA2k,text_offset_below,Qwen2.5-VL-7B,60.9,7
-DA2k,font_scale_0.2,Qwen2.5-VL-7B,59.7,8
-DA2k,default,GPT-4o,61.1,8
-DA2k,color_blue,GPT-4o,61.1,7
-DA2k,marker_square,GPT-4o,60.8,8
-DA2k,radius_3,GPT-4o,64.1,6
-DA2k,text_offset_below,GPT-4o,59.7,8
-DA2k,font_scale_0.2,GPT-4o,62.1,6
-DA2k,default,Gemma 3-4B,50.5,9
-DA2k,color_blue,Gemma 3-4B,51.7,9
-DA2k,marker_square,Gemma 3-4B,50.2,9
-DA2k,radius_3,Gemma 3-4B,50.7,9
-DA2k,text_offset_below,Gemma 3-4B,52.8,9
-DA2k,font_scale_0.2,Gemma 3-4B,51.4,9
-SPair,default,Gemini 2.5 Pro,65.0,1
-SPair,color_blue,Gemini 2.5 Pro,62.9,1
-SPair,marker_square,Gemini 2.5 Pro,64.2,1
-SPair,radius_3,Gemini 2.5 Pro,66.6,1
-SPair,text_offset_below,Gemini 2.5 Pro,64.0,2
-SPair,font_scale_0.2,Gemini 2.5 Pro,66.9,1
-SPair,default,Gemini 2.5 Flash,63.8,2
-SPair,color_blue,Gemini 2.5 Flash,59.8,2
-SPair,marker_square,Gemini 2.5 Flash,61.2,2
-SPair,radius_3,Gemini 2.5 Flash,62.1,2
-SPair,text_offset_below,Gemini 2.5 Flash,64.4,1
-SPair,font_scale_0.2,Gemini 2.5 Flash,64.4,2
-SPair,default,Llama 4 Scout,57.9,3
-SPair,color_blue,Llama 4 Scout,58.0,3
-SPair,marker_square,Llama 4 Scout,58.8,3
-SPair,radius_3,Llama 4 Scout,58.5,3
-SPair,text_offset_below,Llama 4 Scout,57.1,3
-SPair,font_scale_0.2,Llama 4 Scout,40.8,6
-SPair,default,Qwen3-VL-8B,54.8,4
-SPair,color_blue,Qwen3-VL-8B,54.7,4
-SPair,marker_square,Qwen3-VL-8B,51.5,4
-SPair,radius_3,Qwen3-VL-8B,55.9,4
-SPair,text_offset_below,Qwen3-VL-8B,53.7,4
-SPair,font_scale_0.2,Qwen3-VL-8B,48.8,3
-SPair,default,GPT-4.1,49.8,5
-SPair,color_blue,GPT-4.1,48.9,5
-SPair,marker_square,GPT-4.1,47.0,5
-SPair,radius_3,GPT-4.1,49.6,5
-SPair,text_offset_below,GPT-4.1,47.5,5
-SPair,font_scale_0.2,GPT-4.1,48.8,3
-SPair,default,GPT-4o,46.4,6
-SPair,color_blue,GPT-4o,44.3,6
-SPair,marker_square,GPT-4o,40.3,6
-SPair,radius_3,GPT-4o,46.4,6
-SPair,text_offset_below,GPT-4o,44.4,6
-SPair,font_scale_0.2,GPT-4o,43.8,5
-SPair,default,InternVL3-8B,36.9,7
-SPair,color_blue,InternVL3-8B,34.3,8
-SPair,marker_square,InternVL3-8B,34.9,7
-SPair,radius_3,InternVL3-8B,36.0,7
-SPair,text_offset_below,InternVL3-8B,34.4,8
-SPair,font_scale_0.2,InternVL3-8B,26.6,9
-SPair,default,Qwen2.5-VL-7B,36.3,8
-SPair,color_blue,Qwen2.5-VL-7B,35.2,7
-SPair,marker_square,Qwen2.5-VL-7B,33.2,8
-SPair,radius_3,Qwen2.5-VL-7B,34.5,8
-SPair,text_offset_below,Qwen2.5-VL-7B,36.4,7
-SPair,font_scale_0.2,Qwen2.5-VL-7B,29.1,8
-SPair,default,Gemma 3-4B,30.7,9
-SPair,color_blue,Gemma 3-4B,29.2,9
-SPair,marker_square,Gemma 3-4B,29.2,9
-SPair,radius_3,Gemma 3-4B,31.2,9
-SPair,text_offset_below,Gemma 3-4B,31.3,9
-SPair,font_scale_0.2,Gemma 3-4B,29.5,7
+dataset,model,marker_style,accuracy,rank
+BLINK Relative Depth,Gemini 2.5 Pro,default,77.64705882352942,2
+BLINK Relative Depth,Gemini 2.5 Flash,default,77.64705882352942,2
+BLINK Relative Depth,Llama 4 Scout,default,89.41176470588236,1
+BLINK Relative Depth,GPT-4o,default,71.76470588235294,7
+BLINK Relative Depth,Qwen3-VL-8B,default,76.47058823529412,4
+BLINK Relative Depth,Qwen2.5-VL-7B,default,70.58823529411765,8
+BLINK Relative Depth,InternVL3-8B,default,76.47058823529412,4
+BLINK Relative Depth,Gemma 3-4B,default,52.94117647058824,9
+BLINK Relative Depth,GPT-4.1,default,75.29411764705883,6
+BLINK Relative Depth,Gemini 2.5 Pro,color blue,83.52941176470588,2
+BLINK Relative Depth,Gemini 2.5 Flash,color blue,81.17647058823529,3
+BLINK Relative Depth,Llama 4 Scout,color blue,90.58823529411764,1
+BLINK Relative Depth,GPT-4o,color blue,74.11764705882354,6
+BLINK Relative Depth,Qwen3-VL-8B,color blue,78.82352941176471,4
+BLINK Relative Depth,Qwen2.5-VL-7B,color blue,61.1764705882353,8
+BLINK Relative Depth,InternVL3-8B,color blue,67.05882352941175,7
+BLINK Relative Depth,Gemma 3-4B,color blue,57.647058823529406,9
+BLINK Relative Depth,GPT-4.1,color blue,78.82352941176471,4
+BLINK Relative Depth,Gemini 2.5 Pro,font scale 0.2,82.35294117647058,2
+BLINK Relative Depth,Gemini 2.5 Flash,font scale 0.2,80.0,3
+BLINK Relative Depth,Llama 4 Scout,font scale 0.2,90.58823529411764,1
+BLINK Relative Depth,GPT-4o,font scale 0.2,75.29411764705883,6
+BLINK Relative Depth,Qwen3-VL-8B,font scale 0.2,76.47058823529412,5
+BLINK Relative Depth,Qwen2.5-VL-7B,font scale 0.2,55.294117647058826,8
+BLINK Relative Depth,InternVL3-8B,font scale 0.2,71.76470588235294,7
+BLINK Relative Depth,Gemma 3-4B,font scale 0.2,49.41176470588236,9
+BLINK Relative Depth,GPT-4.1,font scale 0.2,80.0,3
+BLINK Relative Depth,Gemini 2.5 Pro,marker type square,84.70588235294117,2
+BLINK Relative Depth,Gemini 2.5 Flash,marker type square,76.47058823529412,5
+BLINK Relative Depth,Llama 4 Scout,marker type square,90.58823529411764,1
+BLINK Relative Depth,GPT-4o,marker type square,75.29411764705883,6
+BLINK Relative Depth,Qwen3-VL-8B,marker type square,77.64705882352942,3
+BLINK Relative Depth,Qwen2.5-VL-7B,marker type square,67.05882352941175,7
+BLINK Relative Depth,InternVL3-8B,marker type square,63.52941176470588,8
+BLINK Relative Depth,Gemma 3-4B,marker type square,55.294117647058826,9
+BLINK Relative Depth,GPT-4.1,marker type square,77.64705882352942,3
+BLINK Relative Depth,Gemini 2.5 Pro,radius 3,76.47058823529412,3
+BLINK Relative Depth,Gemini 2.5 Flash,radius 3,80.0,2
+BLINK Relative Depth,Llama 4 Scout,radius 3,90.58823529411764,1
+BLINK Relative Depth,GPT-4o,radius 3,74.11764705882354,5
+BLINK Relative Depth,Qwen3-VL-8B,radius 3,70.58823529411765,6
+BLINK Relative Depth,Qwen2.5-VL-7B,radius 3,70.58823529411765,6
+BLINK Relative Depth,InternVL3-8B,radius 3,69.41176470588235,8
+BLINK Relative Depth,Gemma 3-4B,radius 3,56.47058823529412,9
+BLINK Relative Depth,GPT-4.1,radius 3,75.29411764705883,4
+BLINK Relative Depth,Gemini 2.5 Pro,text offset below,76.47058823529412,3
+BLINK Relative Depth,Gemini 2.5 Flash,text offset below,76.47058823529412,3
+BLINK Relative Depth,Llama 4 Scout,text offset below,89.41176470588236,1
+BLINK Relative Depth,GPT-4o,text offset below,70.58823529411765,6
+BLINK Relative Depth,Qwen3-VL-8B,text offset below,80.0,2
+BLINK Relative Depth,Qwen2.5-VL-7B,text offset below,69.41176470588235,7
+BLINK Relative Depth,InternVL3-8B,text offset below,68.23529411764706,8
+BLINK Relative Depth,Gemma 3-4B,text offset below,54.11764705882353,9
+BLINK Relative Depth,GPT-4.1,text offset below,76.47058823529412,3
+DA-2K Relative Depth,Gemini 2.5 Pro,default,69.27985414767548,3
+DA-2K Relative Depth,Gemini 2.5 Flash,default,71.37648131267092,2
+DA-2K Relative Depth,Llama 4 Scout,default,73.74658158614403,1
+DA-2K Relative Depth,GPT-4o,default,61.075660893345486,8
+DA-2K Relative Depth,Qwen3-VL-8B,default,69.00638103919782,4
+DA-2K Relative Depth,Qwen2.5-VL-7B,default,61.34913400182316,7
+DA-2K Relative Depth,InternVL3-8B,default,62.807657247037376,6
+DA-2K Relative Depth,Gemma 3-4B,default,50.50136736554239,9
+DA-2K Relative Depth,GPT-4.1,default,64.26618049225159,5
+DA-2K Relative Depth,Gemini 2.5 Pro,color blue,72.28805834092981,3
+DA-2K Relative Depth,Gemini 2.5 Flash,color blue,73.29079307201458,1
+DA-2K Relative Depth,Llama 4 Scout,color blue,72.74384685505926,2
+DA-2K Relative Depth,GPT-4o,color blue,61.075660893345486,7
+DA-2K Relative Depth,Qwen3-VL-8B,color blue,69.0975387420237,4
+DA-2K Relative Depth,Qwen2.5-VL-7B,color blue,58.06745670009116,8
+DA-2K Relative Depth,InternVL3-8B,color blue,62.71649954421149,6
+DA-2K Relative Depth,Gemma 3-4B,color blue,51.68641750227895,9
+DA-2K Relative Depth,GPT-4.1,color blue,64.26618049225159,5
+DA-2K Relative Depth,Gemini 2.5 Pro,font scale 0.2,73.38195077484048,1
+DA-2K Relative Depth,Gemini 2.5 Flash,font scale 0.2,70.92069279854147,3
+DA-2K Relative Depth,Llama 4 Scout,font scale 0.2,71.92342752962625,2
+DA-2K Relative Depth,GPT-4o,font scale 0.2,62.07839562443026,6
+DA-2K Relative Depth,Qwen3-VL-8B,font scale 0.2,69.0975387420237,4
+DA-2K Relative Depth,Qwen2.5-VL-7B,font scale 0.2,59.70829535095715,8
+DA-2K Relative Depth,InternVL3-8B,font scale 0.2,59.89061075660893,7
+DA-2K Relative Depth,Gemma 3-4B,font scale 0.2,51.41294439380128,9
+DA-2K Relative Depth,GPT-4.1,font scale 0.2,64.53965360072927,5
+DA-2K Relative Depth,Gemini 2.5 Pro,marker type square,71.46763901549681,3
+DA-2K Relative Depth,Gemini 2.5 Flash,marker type square,72.10574293527803,2
+DA-2K Relative Depth,Llama 4 Scout,marker type square,72.74384685505926,1
+DA-2K Relative Depth,GPT-4o,marker type square,60.80218778486783,8
+DA-2K Relative Depth,Qwen3-VL-8B,marker type square,67.27438468550592,4
+DA-2K Relative Depth,Qwen2.5-VL-7B,marker type square,62.44302643573382,6
+DA-2K Relative Depth,InternVL3-8B,marker type square,61.44029170464904,7
+DA-2K Relative Depth,Gemma 3-4B,marker type square,50.22789425706472,9
+DA-2K Relative Depth,GPT-4.1,marker type square,62.53418413855971,5
+DA-2K Relative Depth,Gemini 2.5 Pro,radius 3,72.19690063810393,2
+DA-2K Relative Depth,Gemini 2.5 Flash,radius 3,71.74111212397447,3
+DA-2K Relative Depth,Llama 4 Scout,radius 3,74.47584320875113,1
+DA-2K Relative Depth,GPT-4o,radius 3,64.08386508659983,6
+DA-2K Relative Depth,Qwen3-VL-8B,radius 3,67.27438468550592,4
+DA-2K Relative Depth,Qwen2.5-VL-7B,radius 3,60.34639927073838,8
+DA-2K Relative Depth,InternVL3-8B,radius 3,63.08113035551504,7
+DA-2K Relative Depth,Gemma 3-4B,radius 3,50.68368277119416,9
+DA-2K Relative Depth,GPT-4.1,radius 3,64.63081130355515,5
+DA-2K Relative Depth,Gemini 2.5 Pro,text offset below,68.55059252506837,3
+DA-2K Relative Depth,Gemini 2.5 Flash,text offset below,70.19143117593437,2
+DA-2K Relative Depth,Llama 4 Scout,text offset below,70.92069279854147,1
+DA-2K Relative Depth,GPT-4o,text offset below,59.70829535095715,8
+DA-2K Relative Depth,Qwen3-VL-8B,text offset below,65.63354603463992,4
+DA-2K Relative Depth,Qwen2.5-VL-7B,text offset below,60.9845031905196,7
+DA-2K Relative Depth,InternVL3-8B,text offset below,61.53144940747494,6
+DA-2K Relative Depth,Gemma 3-4B,text offset below,52.78030993618961,9
+DA-2K Relative Depth,GPT-4.1,text offset below,64.44849589790337,5
+BLINK Semantic Correspondence,Gemini 2.5 Pro,default,63.46153846153846,1
+BLINK Semantic Correspondence,Gemini 2.5 Flash,default,55.76923076923077,2
+BLINK Semantic Correspondence,Llama 4 Scout,default,53.84615384615385,3
+BLINK Semantic Correspondence,GPT-4o,default,46.15384615384615,6
+BLINK Semantic Correspondence,Qwen3-VL-8B,default,49.03846153846153,5
+BLINK Semantic Correspondence,Qwen2.5-VL-7B,default,32.69230769230769,7
+BLINK Semantic Correspondence,InternVL3-8B,default,26.923076923076923,9
+BLINK Semantic Correspondence,Gemma 3-4B,default,32.69230769230769,7
+BLINK Semantic Correspondence,GPT-4.1,default,50.96153846153846,4
+BLINK Semantic Correspondence,Gemini 2.5 Pro,color blue,61.53846153846154,1
+BLINK Semantic Correspondence,Gemini 2.5 Flash,color blue,61.53846153846154,1
+BLINK Semantic Correspondence,Llama 4 Scout,color blue,59.61538461538461,3
+BLINK Semantic Correspondence,GPT-4o,color blue,43.26923076923077,6
+BLINK Semantic Correspondence,Qwen3-VL-8B,color blue,46.15384615384615,4
+BLINK Semantic Correspondence,Qwen2.5-VL-7B,color blue,34.61538461538461,7
+BLINK Semantic Correspondence,InternVL3-8B,color blue,31.73076923076923,8
+BLINK Semantic Correspondence,Gemma 3-4B,color blue,24.03846153846154,9
+BLINK Semantic Correspondence,GPT-4.1,color blue,44.230769230769226,5
+BLINK Semantic Correspondence,Gemini 2.5 Pro,font scale 0.2,64.42307692307693,1
+BLINK Semantic Correspondence,Gemini 2.5 Flash,font scale 0.2,63.46153846153846,2
+BLINK Semantic Correspondence,Llama 4 Scout,font scale 0.2,45.19230769230769,4
+BLINK Semantic Correspondence,GPT-4o,font scale 0.2,44.230769230769226,5
+BLINK Semantic Correspondence,Qwen3-VL-8B,font scale 0.2,52.88461538461539,3
+BLINK Semantic Correspondence,Qwen2.5-VL-7B,font scale 0.2,32.69230769230769,7
+BLINK Semantic Correspondence,InternVL3-8B,font scale 0.2,40.38461538461539,6
+BLINK Semantic Correspondence,Gemma 3-4B,font scale 0.2,30.76923076923077,9
+BLINK Semantic Correspondence,GPT-4.1,font scale 0.2,32.69230769230769,7
+BLINK Semantic Correspondence,Gemini 2.5 Pro,marker type square,60.57692307692307,1
+BLINK Semantic Correspondence,Gemini 2.5 Flash,marker type square,51.92307692307693,2
+BLINK Semantic Correspondence,Llama 4 Scout,marker type square,49.03846153846153,4
+BLINK Semantic Correspondence,GPT-4o,marker type square,42.30769230769231,6
+BLINK Semantic Correspondence,Qwen3-VL-8B,marker type square,45.19230769230769,5
+BLINK Semantic Correspondence,Qwen2.5-VL-7B,marker type square,40.38461538461539,7
+BLINK Semantic Correspondence,InternVL3-8B,marker type square,35.57692307692308,8
+BLINK Semantic Correspondence,Gemma 3-4B,marker type square,28.846153846153843,9
+BLINK Semantic Correspondence,GPT-4.1,marker type square,51.92307692307693,2
+BLINK Semantic Correspondence,Gemini 2.5 Pro,radius 3,61.53846153846154,1
+BLINK Semantic Correspondence,Gemini 2.5 Flash,radius 3,59.61538461538461,2
+BLINK Semantic Correspondence,Llama 4 Scout,radius 3,53.84615384615385,3
+BLINK Semantic Correspondence,GPT-4o,radius 3,45.19230769230769,6
+BLINK Semantic Correspondence,Qwen3-VL-8B,radius 3,52.88461538461539,4
+BLINK Semantic Correspondence,Qwen2.5-VL-7B,radius 3,32.69230769230769,7
+BLINK Semantic Correspondence,InternVL3-8B,radius 3,31.73076923076923,8
+BLINK Semantic Correspondence,Gemma 3-4B,radius 3,30.76923076923077,9
+BLINK Semantic Correspondence,GPT-4.1,radius 3,50.96153846153846,5
+BLINK Semantic Correspondence,Gemini 2.5 Pro,text offset below,59.61538461538461,1
+BLINK Semantic Correspondence,Gemini 2.5 Flash,text offset below,59.61538461538461,1
+BLINK Semantic Correspondence,Llama 4 Scout,text offset below,51.92307692307693,3
+BLINK Semantic Correspondence,GPT-4o,text offset below,46.15384615384615,5
+BLINK Semantic Correspondence,Qwen3-VL-8B,text offset below,46.15384615384615,5
+BLINK Semantic Correspondence,Qwen2.5-VL-7B,text offset below,27.884615384615387,9
+BLINK Semantic Correspondence,InternVL3-8B,text offset below,35.57692307692308,7
+BLINK Semantic Correspondence,Gemma 3-4B,text offset below,30.76923076923077,8
+BLINK Semantic Correspondence,GPT-4.1,text offset below,47.11538461538461,4
+SPair-71K Semantic Correspondence,Gemini 2.5 Pro,default,65.04524886877829,1
+SPair-71K Semantic Correspondence,Gemini 2.5 Flash,default,63.80090497737556,2
+SPair-71K Semantic Correspondence,Llama 4 Scout,default,57.9185520361991,3
+SPair-71K Semantic Correspondence,GPT-4o,default,46.38009049773756,6
+SPair-71K Semantic Correspondence,Qwen3-VL-8B,default,54.75113122171946,4
+SPair-71K Semantic Correspondence,Qwen2.5-VL-7B,default,36.31221719457013,8
+SPair-71K Semantic Correspondence,InternVL3-8B,default,36.87782805429865,7
+SPair-71K Semantic Correspondence,Gemma 3-4B,default,30.65610859728507,9
+SPair-71K Semantic Correspondence,GPT-4.1,default,49.7737556561086,5
+SPair-71K Semantic Correspondence,Gemini 2.5 Pro,color blue,62.89592760180995,1
+SPair-71K Semantic Correspondence,Gemini 2.5 Flash,color blue,59.841628959276015,2
+SPair-71K Semantic Correspondence,Llama 4 Scout,color blue,58.0316742081448,3
+SPair-71K Semantic Correspondence,GPT-4o,color blue,44.230769230769226,6
+SPair-71K Semantic Correspondence,Qwen3-VL-8B,color blue,54.63800904977375,4
+SPair-71K Semantic Correspondence,Qwen2.5-VL-7B,color blue,35.18099547511312,7
+SPair-71K Semantic Correspondence,InternVL3-8B,color blue,34.276018099547514,8
+SPair-71K Semantic Correspondence,Gemma 3-4B,color blue,29.185520361990957,9
+SPair-71K Semantic Correspondence,GPT-4.1,color blue,48.86877828054298,5
+SPair-71K Semantic Correspondence,Gemini 2.5 Pro,font scale 0.2,66.9683257918552,1
+SPair-71K Semantic Correspondence,Gemini 2.5 Flash,font scale 0.2,64.36651583710407,2
+SPair-71K Semantic Correspondence,Llama 4 Scout,font scale 0.2,40.83710407239819,6
+SPair-71K Semantic Correspondence,GPT-4o,font scale 0.2,43.77828054298642,5
+SPair-71K Semantic Correspondence,Qwen3-VL-8B,font scale 0.2,48.755656108597286,3
+SPair-71K Semantic Correspondence,Qwen2.5-VL-7B,font scale 0.2,29.07239819004525,8
+SPair-71K Semantic Correspondence,InternVL3-8B,font scale 0.2,26.58371040723982,9
+SPair-71K Semantic Correspondence,Gemma 3-4B,font scale 0.2,29.411764705882355,7
+SPair-71K Semantic Correspondence,GPT-4.1,font scale 0.2,48.755656108597286,3
+SPair-71K Semantic Correspondence,Gemini 2.5 Pro,marker type square,64.25339366515837,1
+SPair-71K Semantic Correspondence,Gemini 2.5 Flash,marker type square,61.19909502262444,2
+SPair-71K Semantic Correspondence,Llama 4 Scout,marker type square,58.82352941176471,3
+SPair-71K Semantic Correspondence,GPT-4o,marker type square,40.27149321266968,6
+SPair-71K Semantic Correspondence,Qwen3-VL-8B,marker type square,51.47058823529412,4
+SPair-71K Semantic Correspondence,Qwen2.5-VL-7B,marker type square,33.257918552036195,8
+SPair-71K Semantic Correspondence,InternVL3-8B,marker type square,34.841628959276015,7
+SPair-71K Semantic Correspondence,Gemma 3-4B,marker type square,29.185520361990957,9
+SPair-71K Semantic Correspondence,GPT-4.1,marker type square,46.94570135746606,5
+SPair-71K Semantic Correspondence,Gemini 2.5 Pro,radius 3,66.6289592760181,1
+SPair-71K Semantic Correspondence,Gemini 2.5 Flash,radius 3,62.10407239819005,2
+SPair-71K Semantic Correspondence,Llama 4 Scout,radius 3,58.4841628959276,3
+SPair-71K Semantic Correspondence,GPT-4o,radius 3,46.38009049773756,6
+SPair-71K Semantic Correspondence,Qwen3-VL-8B,radius 3,55.88235294117647,4
+SPair-71K Semantic Correspondence,Qwen2.5-VL-7B,radius 3,34.50226244343892,8
+SPair-71K Semantic Correspondence,InternVL3-8B,radius 3,35.97285067873303,7
+SPair-71K Semantic Correspondence,Gemma 3-4B,radius 3,31.108597285067876,9
+SPair-71K Semantic Correspondence,GPT-4.1,radius 3,49.5475113122172,5
+SPair-71K Semantic Correspondence,Gemini 2.5 Pro,text offset below,64.02714932126696,2
+SPair-71K Semantic Correspondence,Gemini 2.5 Flash,text offset below,64.36651583710407,1
+SPair-71K Semantic Correspondence,Llama 4 Scout,text offset below,57.12669683257919,3
+SPair-71K Semantic Correspondence,GPT-4o,text offset below,44.34389140271493,6
+SPair-71K Semantic Correspondence,Qwen3-VL-8B,text offset below,53.619909502262445,4
+SPair-71K Semantic Correspondence,Qwen2.5-VL-7B,text offset below,36.42533936651584,7
+SPair-71K Semantic Correspondence,InternVL3-8B,text offset below,34.38914027149321,8
+SPair-71K Semantic Correspondence,Gemma 3-4B,text offset below,31.22171945701357,9
+SPair-71K Semantic Correspondence,GPT-4.1,text offset below,47.511312217194565,5

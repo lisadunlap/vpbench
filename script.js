@@ -63,6 +63,73 @@ function parseSimpleCsv(csvText) {
   return { headers, rows };
 }
 
+/**
+ * Build a header -> index mapping for a CSV header row.
+ *
+ * @param {string[]} headers - CSV header names.
+ * @returns {Record<string, number>} Map from header name to column index.
+ */
+function buildCsvHeaderIndex(headers) {
+  /** @type {Record<string, number>} */
+  const idx = {};
+  headers.forEach((h, i) => {
+    if (!h) return;
+    idx[h] = i;
+  });
+  return idx;
+}
+
+/**
+ * Normalize dataset strings in `marker_acc.csv` to match the UI dropdown keys.
+ *
+ * Expected outputs:
+ * - "DA2k"
+ * - "SPair"
+ * - otherwise returns the original dataset value (for forward compatibility)
+ *
+ * @param {string} datasetValue
+ * @returns {string}
+ */
+function normalizeDatasetKey(datasetValue) {
+  const v = (datasetValue || "").trim();
+  if (!v) return v;
+  if (v === "DA2k" || v.toLowerCase() === "da2k") return "DA2k";
+  if (v.startsWith("DA-2K")) return "DA2k";
+  if (v === "SPair" || v.toLowerCase() === "spair") return "SPair";
+  if (v.startsWith("SPair")) return "SPair";
+  return v;
+}
+
+/**
+ * Normalize marker-style strings in `marker_acc.csv` to match the UI button keys.
+ *
+ * Expected outputs:
+ * - "default"
+ * - "color_blue"
+ * - "marker_square"
+ * - "radius_3"
+ * - "text_offset_below"
+ * - "font_scale_0.2"
+ * - otherwise returns a normalized (lowercase, underscores) version
+ *
+ * @param {string} markerStyleValue
+ * @returns {string}
+ */
+function normalizeMarkerStyleKey(markerStyleValue) {
+  const raw = (markerStyleValue || "").trim();
+  if (!raw) return raw;
+
+  const v = raw.toLowerCase().replace(/\s+/g, " ");
+  if (v === "default") return "default";
+  if (v === "color blue" || v === "color_blue") return "color_blue";
+  if (v === "marker type square" || v === "marker_square" || v === "marker type: square") return "marker_square";
+  if (v === "radius 3" || v === "radius_3") return "radius_3";
+  if (v === "text offset below" || v === "text_offset_below") return "text_offset_below";
+  if (v === "font scale 0.2" || v === "font_scale_0.2") return "font_scale_0.2";
+
+  return v.replace(/[^\w.]+/g, "_");
+}
+
 // ===========================
 // Interactive marker comparison (DA2k data from CSV)
 // ===========================
@@ -78,37 +145,73 @@ async function loadMarkerData() {
     }
     const csvText = await response.text();
     
-    const { rows } = parseSimpleCsv(csvText);
+    const { headers, rows } = parseSimpleCsv(csvText);
+    const headerIdx = buildCsvHeaderIndex(headers);
 
-    const parsedRows = rows.map((values) => {
-      return {
-        dataset: values[0],
-        marker_style: values[1],
-        model: values[2],
-        accuracy: parseFloat(values[3]),
-        rank: parseInt(values[4])
-      };
-    });
+    const datasetIdx = headerIdx.dataset;
+    const modelIdx = headerIdx.model;
+    const markerStyleIdx = headerIdx.marker_style;
+    const accuracyIdx = headerIdx.accuracy;
+    const rankIdx = headerIdx.rank;
+
+    const missing = [];
+    if (datasetIdx === undefined) missing.push("dataset");
+    if (modelIdx === undefined) missing.push("model");
+    if (markerStyleIdx === undefined) missing.push("marker_style");
+    if (accuracyIdx === undefined) missing.push("accuracy");
+    if (rankIdx === undefined) missing.push("rank");
+    if (missing.length) {
+      throw new Error(`marker_acc.csv is missing required columns: ${missing.join(", ")}`);
+    }
+
+    const parsedRows = rows
+      .filter((values) => values.length >= headers.length)
+      .map((values) => {
+        return {
+          dataset: normalizeDatasetKey(values[datasetIdx]),
+          marker_style: normalizeMarkerStyleKey(values[markerStyleIdx]),
+          model: (values[modelIdx] || "").trim(),
+          accuracy: parseFloat(values[accuracyIdx]),
+          rank: parseInt(values[rankIdx], 10),
+        };
+      })
+      .filter((row) => row.dataset && row.marker_style && row.model && Number.isFinite(row.accuracy) && Number.isFinite(row.rank));
     
     const datasets = [...new Set(parsedRows.map((row) => row.dataset))];
     const data = {};
     
     datasets.forEach((dataset) => {
       const datasetRows = parsedRows.filter((row) => row.dataset === dataset);
-      const models = [...new Set(datasetRows.map((row) => row.model))];
       const markerStyles = [...new Set(datasetRows.map((row) => row.marker_style))];
-      
-      data[dataset] = { models };
-      
-      markerStyles.forEach((style) => {
-        const styleRows = datasetRows.filter((row) => row.marker_style === style);
-        styleRows.sort((a, b) => models.indexOf(a.model) - models.indexOf(b.model));
-        
-        data[dataset][style] = {
-          accuracies: styleRows.map((row) => row.accuracy),
-          ranks: styleRows.map((row) => row.rank)
-        };
+
+      /** @type {Map<string, Map<string, {accuracy: number, rank: number}>>} */
+      const byStyleByModel = new Map();
+      markerStyles.forEach((style) => byStyleByModel.set(style, new Map()));
+      datasetRows.forEach((row) => {
+        if (!byStyleByModel.has(row.marker_style)) byStyleByModel.set(row.marker_style, new Map());
+        byStyleByModel.get(row.marker_style).set(row.model, { accuracy: row.accuracy, rank: row.rank });
       });
+
+      const defaultModelMap = byStyleByModel.get("default");
+      const defaultModels = defaultModelMap ? [...defaultModelMap.keys()] : [...new Set(datasetRows.map((row) => row.model))];
+
+      // Keep only models that exist for every marker style (prevents undefined array entries downstream).
+      const models = defaultModels.filter((m) => {
+        for (const style of byStyleByModel.keys()) {
+          const modelMap = byStyleByModel.get(style);
+          if (!modelMap || !modelMap.has(m)) return false;
+        }
+        return true;
+      });
+
+      data[dataset] = { models };
+
+      for (const [style, modelMap] of byStyleByModel.entries()) {
+        data[dataset][style] = {
+          accuracies: models.map((m) => modelMap.get(m).accuracy),
+          ranks: models.map((m) => modelMap.get(m).rank),
+        };
+      }
     });
     
     MARKER_DATA = data;
