@@ -101,6 +101,27 @@ function normalizeDatasetKey(datasetValue) {
 }
 
 /**
+ * Map internal dataset keys (used in CSV + logic) to display names (used in UI text).
+ *
+ * Expected input:
+ * - "DA2k" | "SPair" | any other string
+ *
+ * Expected output:
+ * - "VPBench Rel. Depth" for "DA2k"
+ * - "VPBench Sem. Corr." for "SPair"
+ * - otherwise returns the original key (so new datasets still show something sensible)
+ *
+ * @param {string} datasetKey
+ * @returns {string}
+ */
+function datasetDisplayName(datasetKey) {
+  const key = (datasetKey || "").trim();
+  if (key === "DA2k") return "VPBench Rel. Depth";
+  if (key === "SPair") return "VPBench Sem. Corr.";
+  return key;
+}
+
+/**
  * Normalize marker-style strings in `marker_acc.csv` to match the UI button keys.
  *
  * Expected outputs:
@@ -131,7 +152,7 @@ function normalizeMarkerStyleKey(markerStyleValue) {
 }
 
 // ===========================
-// Interactive marker comparison (DA2k data from CSV)
+// Interactive marker comparison (data from CSV)
 // ===========================
 
 let MARKER_DATA = null;
@@ -272,7 +293,7 @@ function updateVisualization(markerKey) {
   const yRange = currentDataset === 'DA2k' ? [45, 100] : [20, 100];
   
   const layout = {
-    title: { text: `Accuracy Comparison (${currentDataset})`, font: { size: 14, family: "Avenir Next, Avenir, sans-serif" } },
+    title: { text: `Accuracy Comparison (${datasetDisplayName(currentDataset)})`, font: { size: 14, family: "Avenir Next, Avenir, sans-serif" } },
     xaxis: { title: "", tickangle: -45, tickfont: { size: 11 } },
     yaxis: { title: "Accuracy (%)", range: yRange },
     barmode: "group",
