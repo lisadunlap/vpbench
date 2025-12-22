@@ -122,7 +122,44 @@ pre {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 14px;
+}
+
+/* Hero links: render as underlined words (not pill buttons) */
+.hero .ctaRow {
+  gap: 18px;
+  margin-top: 14px;
+}
+.hero .ctaRow .btn {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--teal2);
+  font-size: 16px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: color 140ms ease, text-decoration-color 140ms ease;
+}
+.hero .ctaRow .btn:hover {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+  color: var(--teal);
+}
+.hero .ctaRow .btn:active {
+  transform: none;
+  box-shadow: none;
+}
+.hero .ctaRow .btn[aria-disabled="true"] {
+  opacity: 1;
+  color: var(--muted2);
+  cursor: default;
+  text-decoration-color: rgba(17, 24, 39, 0.35);
 }
 
 .btn {
@@ -130,28 +167,43 @@ pre {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 14px;
+  padding: 11px 16px;
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.72);
   color: var(--ink);
   font-size: 14px;
   font-weight: 650;
+  box-shadow: 0 6px 14px rgba(11, 18, 32, 0.06);
+  transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
 }
 .btn:hover {
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(11, 18, 32, 0.20);
+  box-shadow: 0 10px 22px rgba(11, 18, 32, 0.08);
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0px);
+  box-shadow: 0 6px 14px rgba(11, 18, 32, 0.06);
+}
+.btn:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.28);
+  outline-offset: 2px;
 }
 .btn[aria-disabled="true"] {
-  opacity: 0.65;
+  opacity: 0.56;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .btn--primary {
-  border-color: rgba(37, 99, 235, 0.35);
-  background: rgba(37, 99, 235, 0.10);
+  border-color: rgba(37, 99, 235, 0.65);
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0.10));
 }
 .btn--ghost {
-  background: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.58);
 }
 .btn--small {
   padding: 8px 10px;
