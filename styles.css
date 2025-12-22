@@ -332,13 +332,14 @@ pre {
   color: rgba(17, 24, 39, 0.92);
 }
 
-/* Utility: crop a bit off the top of an image (used for heatmaps) */
+/* Utility: previously used to crop a bit off the top of an image (heatmaps).
+   Disabled so figures render fully without clipping. */
 .imgCrop {
-  overflow: hidden;
+  overflow: visible;
 }
 .imgCrop--top10 img {
-  transform: translateY(-10px) scaleY(1.03);
-  transform-origin: top center;
+  transform: none;
+  transform-origin: initial;
 }
 
 .grid2 {
