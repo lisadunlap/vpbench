@@ -118,6 +118,18 @@ pre {
   font-size: 16px;
 }
 
+.hero__tagline--tldr {
+  display: inline-block;
+  max-width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  color: var(--teal2);
+  line-height: 1.45;
+  margin-bottom: 0px;
+}
+
 .ctaRow {
   display: flex;
   flex-wrap: wrap;
@@ -338,7 +350,7 @@ pre {
   overflow: visible;
 }
 .imgCrop--top10 img {
-  transform: none;
+  transform: translateY(20px) scaleY(1.03);
   transform-origin: initial;
 }
 
