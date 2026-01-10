@@ -89,7 +89,7 @@ pre {
 }
 
 .hero__title {
-  margin: 0 0 12px;
+  margin: 0 0 20px;
   font-size: clamp(32px, 5vw, 52px);
   letter-spacing: -0.02em;
   line-height: 1.05;
